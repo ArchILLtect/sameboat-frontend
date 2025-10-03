@@ -3,6 +3,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import type { AuthStore, AuthUser } from './types';
 import { api } from '../../lib/api';
 import { isBackendAuthErrorPayload, mapAuthError } from './errors';
+import { emit } from '../../lib/events';
 
 // Endpoint paths (centralized so migrations are single-touch)
 // NOTE: User self endpoint on backend is dual-mapped as /me and /api/me (NOT /auth/me)
@@ -115,6 +116,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setStatus('authenticated');
         setLastFetched(Date.now());
         clearError();
+        emit('auth:refresh', { user: u });
   if (import.meta.env.DEV && !isVitest) console.debug('[auth] refresh() success (user)');
       } else {
         setUser(null);
@@ -149,6 +151,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           setStatus('authenticated');
           setLastFetched(Date.now());
         }
+        emit('auth:login', { user: u });
         success = true;
       } else {
         await refresh(); // cookie set, no body scenario
@@ -223,6 +226,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setStatus('idle');
         setLastFetched(undefined);
       }
+      emit('auth:logout');
     }
   }, [clearError]);
 
