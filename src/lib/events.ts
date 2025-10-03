@@ -22,7 +22,6 @@ export function emit(type: AppEventType, payload?: unknown) {
   const evt: AppEvent = { type, payload, ts: Date.now() };
   for (const l of listeners) l(evt);
   if (import.meta.env.DEV && import.meta.env.VITE_DEBUG_EVENTS) {
-    // eslint-disable-next-line no-console
     console.debug('[event]', evt);
   }
 }
