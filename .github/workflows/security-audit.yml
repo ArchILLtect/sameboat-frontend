@@ -1,0 +1,42 @@
+name: Security Audit (npm)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 8 * * 1' # weekly
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  npm-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps (CI)
+        run: npm ci
+
+      - name: npm audit (high/critical only)
+        run: |
+          set -e
+          echo "Running npm audit (omit dev, level=high)"
+          npm audit --omit=dev --audit-level=high || {
+            echo "High/Critical vulnerabilities found.";
+            exit 1;
+          }

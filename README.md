@@ -11,6 +11,12 @@
 
 SameBoat Frontend is a lightweight Vite + React 19 single-page application scaffold. It focuses on fast local iteration (HMR), strict TypeScript, and a minimal baseline you can extend (routing, API clients, state management) without vendor lock-in.
 
+Live App: https://sameboatplatform.org/
+
+Also available via Netlify default domain: https://app-sameboat.netlify.app/
+
+Note: adopting a dedicated subdomain like https://app.sameboatplatform.org is a common production practice. It cleanly separates marketing/docs (root) from the application, simplifies cookie scoping and CSP, and scales well as you add more subdomains. You can adopt it later without code changes.
+
 ### Planning Artifacts
 
 -   Week 3 Progress Checklist: `docs/week-3-plan-checklist.md`
@@ -85,6 +91,7 @@ Add components under `src/components/` and import into pages or `App.tsx`.
 2. Start dev server: `npm run dev` (default http://localhost:5173)
 3. Type-first build: `npm run build` (runs `tsc -b && vite build`)
 4. Preview production bundle: `npm run preview`
+5. Bundle analyze (optional): `npm run analyze` (generates a visual report of bundle composition)
 5. Lint before commit: `npm run lint`
 6. (Optional) Auto hooks: Husky runs lint/tests/commitlint pre-push / commit.
 
@@ -275,3 +282,20 @@ git fetch origin --prune
 ```
 
 CI badge & links have been updated to the new organization path.
+
+## Performance Budget (soft targets)
+
+Track these as guidelines (non-blocking) and iterate once stable. Use a bundle analyzer locally and Lighthouse for quick checks.
+
+- JavaScript (gzipped)
+    - Initial JS on home route ≤ 250 KB
+    - Largest single JS chunk ≤ 150 KB
+    - Initial JS requests ≤ 5
+- CSS (gzipped): initial route ≤ 50 KB
+- Web Vitals (lab targets)
+    - LCP ≤ 2.5s (desktop), ≤ 4.0s (simulated mid‑tier mobile)
+    - CLS ≤ 0.10
+    - TBT ≤ 200 ms (desktop lab)
+- Images: avoid render‑blocking images on initial route; lazy‑load non‑critical assets
+
+Later, you can add a non-failing CI job to post bundle/Lighthouse deltas on PRs and convert to hard gates once the app stabilizes.
