@@ -25,7 +25,7 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "framer-motion": "^11.0.0",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1",
+    "react-dom": "^19.2.0",
     "react-router-dom": "^7.9.3"
   },
   "devDependencies": {
@@ -36,7 +36,7 @@
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.5.2",
     "@types/react": "^19.1.13",
-    "@types/react-dom": "^19.1.9",
+    "@types/react-dom": "^19.2.0",
     "@typescript-eslint/eslint-plugin": "^8.45.0",
     "@typescript-eslint/parser": "^8.45.0",
     "@vitejs/plugin-react-swc": "^4.0.1",
