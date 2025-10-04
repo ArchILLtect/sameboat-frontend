@@ -25,13 +25,15 @@ export default function Home() {
                   <Text opacity={0.6}>Loading session…</Text>
                 )}
                 {bootstrapped && (
-                  <>
-                    <Text opacity={0.6}>Not signed in.</Text>
-                    <Flex justifyContent={'center'}>
-                      <Link as={RouterLink} to='/login' textDecoration='underline'>Login</Link>
-                      <Link as={RouterLink} to='/register' textDecoration='underline'>Register</Link>
-                    </Flex>
-                  </>
+                  <Flex justifyContent={'center'} width={'100%'} >
+                    <Stack width={'100%'}>
+                      <Text opacity={0.6} fontSize={'xl'} mt={10}>Not signed in.</Text>
+                      <Flex justifyContent={'space-around'} width={'100%'}>
+                        <Link as={RouterLink} to='/login' textDecoration='underline' fontSize={'lg'}>Login</Link>
+                        <Link as={RouterLink} to='/register' textDecoration='underline' fontSize={'lg'}>Register</Link>
+                      </Flex>
+                    </Stack>
+                  </Flex>
                 )}
               </>
             )}

@@ -1,5 +1,9 @@
 # Things To Do (TTD)
 
+## 0.2.0
+
+-   Adopt GitHub CLI for release and project automation (gh install, auth, basic scripts).
+
 ## UI/UX
 
 -   Debounce rapid backend health status flips by enforcing a minimum skeleton display duration.
@@ -32,6 +36,13 @@
 -   Add a custom CI step that fails if no test files were touched for a PR containing `feat:` or `fix:` commits.
 -   Script/guard to fail if a `feat:` commit lands without any matching diff in `src/__tests__/` (heuristic; allow override via `[skip-test-guard]`).
 -   GitHub Action to auto-assign PR label based on first conventional commit type (feat/fix/docs/chore/refactor/test/perf).
+    
+### Project Automation
+
+-   Auto-update the Project “Status” field when a linked PR is merged (project workflows; ensure issues close via closing keywords).
+-   Automated release creation: script adds tag + creates GitHub Release in one step (use gh CLI once adopted).
+-   Script dependency triage or labeling (e.g., label Dependabot PRs by group and auto-add to Project backlog).
+-   Scriptable gating: verify CHANGELOG entry before tagging a release; fail CI otherwise.
     
 ### Dependency / Security Automation
 
