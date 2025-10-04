@@ -24,7 +24,7 @@
     "@emotion/styled": "^11.13.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "framer-motion": "^11.0.0",
+    "framer-motion": "^12.23.22",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.3"
